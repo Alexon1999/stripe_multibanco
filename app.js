@@ -22,7 +22,8 @@ app.post("/webhook", async (req, res) => {
         currency: "eur",
         source: source.data.object.id,
       });
-      res.json({ msg: "charge created" });
+      // res.json({ msg: "charge created" });
+      break;
     default:
       res.json(source);
   }
