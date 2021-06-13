@@ -4,6 +4,10 @@ const app = express();
 
 app.use(express.json());
 
+app.get("/", (req, res) => {
+  res.json({ msg: "stripe webhook :)" });
+});
+
 app.post("/webhook", (req, res) => {
   const data = req.body;
 
