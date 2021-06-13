@@ -1,0 +1,37 @@
+<script src="https://js.stripe.com/v3/"></script>
+
+<script>
+var stripe = Stripe('pk_live_51I0VvsDyAz8q2clU1Kd07q2LrBxDvVqGZ2zsTrP0Qy5M2HQo6rI8mzaGanYofkWmuLLXjqvpP2sd1PIl0lIq9eHd00Mlv5NJgC');
+ 
+    {% if order.gateway contains 'MultiBanco' %}
+const {firstname , lastname } = Shopify.checkout.billing_address;
+stripe.createSource({
+  type: 'multibanco',
+  amount: parseInt((Shopify.checkout.total_price * 100).toFixed(2), 10),
+  currency: 'eur',
+  owner: {
+    name: firstname + " " + lastname,
+    email: Shopify.checkout.email,
+  },
+  redirect: {
+    return_url: 'https://nara-portugal.com/',
+  },
+}).then(function(result) {
+  // handle result.error or result.source
+console.log(Shopify.checkout);
+console.log(result);
+if(result.source){
+const {entity , reference } = result.source.multibanco;
+Shopify.Checkout.OrderStatus.addContentBox(
+        `<h2 class="heading-2 os-step__title" style="margin-bottom: 7px;">Pagamento por MultiBanco</h1>
+<div style="display:flex; justify-content:center; flex-direction:column;">
+<p>Entitade: <span style="font-weight:bold"> ${entity} </span></p>
+<p>Referncia: <span style="font-weight:bold"> ${reference} </span></p>
+<p>Valor: <span style="font-weight:bold"> ${Shopify.checkout.total_price} € </span></p>
+</div> `)
+}
+});
+      
+
+    {% endif %}
+  </script>
