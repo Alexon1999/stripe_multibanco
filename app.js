@@ -11,24 +11,22 @@ app.get("/", (req, res) => {
   res.json({ msg: "stripe webhook :)" });
 });
 
-app.post("/webhook", async (req, res) => {
+app.post("/webhook-source-chargeable", async (req, res) => {
   // we get the source object
   const source = req.body;
 
-  switch (source.type) {
-    case "source.chargeable":
-      const charge = await stripe.charges.create({
-        amount: source.data.object.amount,
-        currency: "eur",
-        source: source.data.object.id,
-      });
-      // res.json({ msg: "charge created" });
-      break;
-    default:
-      res.json(source);
+  try {
+    const charge = await stripe.charges.create({
+      amount: source.data.object.amount,
+      currency: "eur",
+      source: source.data.object.id,
+    });
+    res.json({ msg: "charge created" });
+  } catch (error) {
+    res.json({ msg: error.message });
   }
 
-  res.json(source);
+  // res.json(source);
 });
 
 const PORT = process.env.PORT || 5000;
