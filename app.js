@@ -22,10 +22,12 @@ app.post("/webhook", async (req, res) => {
         currency: "eur",
         source: source.data.object.id,
       });
-      return res.json({ msg: "charge created" });
+      res.json({ msg: "charge created" });
     default:
-      return res.json(source);
+      res.json(source);
   }
+
+  res.json(source);
 });
 
 const PORT = process.env.PORT || 5000;
