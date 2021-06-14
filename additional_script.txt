@@ -1,7 +1,7 @@
 <script src="https://js.stripe.com/v3/"></script>
 
 <script>
-var stripe = Stripe('pk_live_51I0VvsDyAz8q2clU1Kd07q2LrBxDvVqGZ2zsTrP0Qy5M2HQo6rI8mzaGanYofkWmuLLXjqvpP2sd1PIl0lIq9eHd00Mlv5NJgC');
+var stripe = Stripe('stripe public key');
  
     {% if order.gateway contains 'MultiBanco' %}
 const {firstname , lastname } = Shopify.checkout.billing_address;
