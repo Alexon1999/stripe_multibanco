@@ -11,11 +11,12 @@ app.get("/", (req, res) => {
   res.json({ msg: "stripe webhook :)" });
 });
 
-// Once the source is chargeable, client send the funds
+// Once the source is chargeable =  client send the funds
 app.post("/webhook-source-chargeable", async (req, res) => {
   // we get the source object
   const source = req.body;
 
+  // make a charge request
   try {
     const charge = await stripe.charges.create({
       amount: source.data.object.amount,
