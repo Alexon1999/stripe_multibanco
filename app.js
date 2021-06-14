@@ -38,5 +38,15 @@ app.post("/webhook-charge-succeeded", async (req, res) => {
   res.json({ msg: "charge has succeeded" });
 });
 
+// Confirm failed
+app.post("/webhook-charge-failed", async (req, res) => {
+  // we get the charge object
+  const charge = req.body;
+
+  // ex: send email to client
+
+  res.json({ msg: "charge has failed" });
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on Port on ${PORT}`));
