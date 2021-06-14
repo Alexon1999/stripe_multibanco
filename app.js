@@ -11,7 +11,7 @@ app.get("/", (req, res) => {
   res.json({ msg: "stripe webhook :)" });
 });
 
-// Once the source is chargeable
+// Once the source is chargeable, client send the funds
 app.post("/webhook-source-chargeable", async (req, res) => {
   // we get the source object
   const source = req.body;
@@ -30,20 +30,12 @@ app.post("/webhook-source-chargeable", async (req, res) => {
 
 // Confirm that the charge has succeeded
 app.post("/webhook-charge-succeeded", async (req, res) => {
-  // we get the source object
+  // we get the charge object
   const charge = req.body;
 
-  res.json(charge);
-  // try {
-  //   const charge = await stripe.charges.create({
-  //     amount: source.data.object.amount,
-  //     currency: "eur",
-  //     source: source.data.object.id,
-  //   });
-  //   res.json({ msg: "charge created" });
-  // } catch (error) {
-  //   res.json({ msg: error.message });
-  // }
+  // ex: send email to client
+
+  res.json({ msg: "charge has succeeded" });
 });
 
 const PORT = process.env.PORT || 5000;
