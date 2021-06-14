@@ -25,7 +25,7 @@ const {entity , reference } = result.source.multibanco;
 Shopify.Checkout.OrderStatus.addContentBox(
         `<h2 class="heading-2 os-step__title" style="margin-bottom: 7px;">Pagamento por MultiBanco</h1>
 <div style="display:flex; justify-content:center; flex-direction:column;">
-<p>Entitade: <span style="font-weight:bold"> ${entity} </span></p>
+<p>Entidade: <span style="font-weight:bold"> ${entity} </span></p>
 <p>Referncia: <span style="font-weight:bold"> ${reference} </span></p>
 <p>Valor: <span style="font-weight:bold"> ${Shopify.checkout.total_price} € </span></p>
 </div> `)
