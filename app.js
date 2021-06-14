@@ -1,7 +1,6 @@
+require("dotenv").config();
 const express = require("express");
-const stripe = require("stripe")(
-  "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"
-);
+const stripe = require("stripe")(process.env.secret_key);
 
 const app = express();
 
