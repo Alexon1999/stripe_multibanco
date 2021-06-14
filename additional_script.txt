@@ -13,6 +13,9 @@ stripe.createSource({
     name: firstname + " " + lastname,
     email: Shopify.checkout.email,
   },
+metadata:{
+order : document.querySelector('.os-order-number').textContent.trim(),
+},
   redirect: {
     return_url: 'https://nara-portugal.com/',
   },

@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const stripe = require("stripe")(process.env.secret_key);
-var nodemailer = require("nodemailer");
+// var nodemailer = require("nodemailer");
 
 const app = express();
 
@@ -40,6 +40,7 @@ app.post("/webhook-source-chargeable", async (req, res) => {
 app.post("/webhook-charge-succeeded", async (req, res) => {
   // we get the charge object
   const charge = req.body;
+  // email :  charge.data.object.metadata.owner.email
 
   // ex: send email to client
   // var transporter = nodemailer.createTransport({
